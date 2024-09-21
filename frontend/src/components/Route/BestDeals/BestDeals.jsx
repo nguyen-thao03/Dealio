@@ -11,15 +11,18 @@ const BestDeals = () => {
     const firstFive = allProducts && allProducts.slice(0, 5);
     setData(firstFive);
   }, [allProducts]);
+
   return (
-    <div>
-      <div className={`${styles.section}`}>
-        <div className={`${styles.heading}`}>
-          <h1>Ưu đãi tốt nhất</h1>
-        </div>
-        <div className="grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-4 lg:gap-[25px] xl:grid-cols-5 xl:gap-[30px] mb-12 border-0">
-          {data && data.map((i, index) => <ProductCard data={i} key={index} />)}
-        </div>
+    <div className={`${styles.section} mb-12`}>
+      <div className={`${styles.heading} mb-6`}>
+        <h1 className="text-2xl font-bold text-[#2dcc82]">Ưu đãi tốt nhất</h1>
+      </div>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {data && data.map((item, index) => (
+          <div className="transition-transform transform hover:scale-105 duration-300" key={index}>
+            <ProductCard data={item} />
+          </div>
+        ))}
       </div>
     </div>
   );

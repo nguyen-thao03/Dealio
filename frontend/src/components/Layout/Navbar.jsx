@@ -5,18 +5,18 @@ import styles from "../../styles/styles";
 
 const Navbar = ({ active }) => {
   return (
-    <div className={`block 800px:${styles.normalFlex}`}>
-      {navItems.map((i, index) => (
+    <div className={`flex flex-wrap justify-center items-center ${styles.normalFlex}`}>
+      {navItems.map((item, index) => (
         <div className="flex" key={index}>
           <Link
-            to={i.url}
+            to={item.url}
             className={`${
               active === index + 1
-                ? "text-[#2dcc82]"
-                : "text-black 800px:text-black"
-            } pb-[30px] 800px:pb-0 font-[500] px-6 cursor-pointer`}
+                ? "text-[#2dcc82] font-bold border-b-2 border-[#2dcc82]"
+                : "text-black"
+            }  mx-4 transition duration-300 hover:text-[#2dcc82] hover:underline cursor-pointer`}
           >
-            {i.title}
+            {item.title}
           </Link>
         </div>
       ))}

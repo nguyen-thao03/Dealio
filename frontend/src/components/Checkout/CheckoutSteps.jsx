@@ -1,41 +1,48 @@
-import React from 'react'
-import styles from '../../styles/styles'
+import React from 'react';
+import styles from '../../styles/styles';
 
 const CheckoutSteps = ({ active }) => {
-    console.log(active);
     return (
-        <div className='w-full flex justify-center'>
-            <div className="w-[90%] 800px:w-[50%] flex items-center flex-wrap">
-                <div className={`${styles.normalFlex}`}>
-                    <div className={`${styles.cart_button}`}>
-                        <span className={`${styles.cart_button_text}`}>1.Vận chuyển</span>
-                    </div>
-                    <div className={`${active > 1 ? "w-[30px] 800px:w-[70px] h-[4px] !bg-[#f63b60]"
-                            : "w-[30px] 800px:w-[70px] h-[4px] !bg-[#FDE1E6]"
-                        }`} />
-                </div>
-
-                <div className={`${styles.normalFlex}`}>
-                    <div className={`${active > 1 ? `${styles.cart_button}` : `${styles.cart_button} !bg-[#FDE1E6]`}`}>
-                        <span className={`${active > 1 ? `${styles.cart_button_text}` : `${styles.cart_button_text} !text-[#f63b60]`}`}>
-                            2.Thanh toán
-                        </span>
-                    </div>
-                </div>
-
-                <div className={`${styles.normalFlex}`}>
-                    <div className={`${active > 3 ? "w-[30px] 800px:w-[70px] h-[4px] !bg-[#f63b60]"
-                            : "w-[30px] 800px:w-[70px] h-[4px] !bg-[#FDE1E6]"
-                        }`} />
-                    <div className={`${active > 2 ? `${styles.cart_button}` : `${styles.cart_button} !bg-[#FDE1E6]`}`}>
-                        <span className={`${active > 2 ? `${styles.cart_button_text}` : `${styles.cart_button_text} !text-[#f63b60]`}`}>
-                            3.Thành công
-                        </span>
-                    </div>
-                </div>
+        <div className='w-full flex justify-center mb-8'>
+            <div className="w-[90%] 800px:w-[50%] flex items-center justify-between">
+                <Step
+                    number={1}
+                    title="Vận chuyển"
+                    isActive={active >= 1}
+                />
+                <StepDivider isActive={active > 1} />
+                <Step
+                    number={2}
+                    title="Thanh toán"
+                    isActive={active >= 2}
+                />
+                <StepDivider isActive={active > 2} />
+                <Step
+                    number={3}
+                    title="Thành công"
+                    isActive={active >= 3}
+                />
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default CheckoutSteps
+const Step = ({ number, title, isActive }) => {
+    return (
+        <div className={`${styles.normalFlex} flex-col items-center`}>
+            <div className={`${styles.cart_button} ${isActive ? 'bg-[#2dcc82]' : 'bg-[#95eac3]'} transition duration-300`}>
+                <span className={`${styles.cart_button_text} ${isActive ? 'text-white' : 'text-white'}`}>
+                    {number}. {title}
+                </span>
+            </div>
+        </div>
+    );
+};
+
+const StepDivider = ({ isActive }) => {
+    return (
+        <div className={`w-[30px] 800px:w-[70px] h-[4px] ${isActive ? '!bg-[#2dcc82]' : '!bg-[#95eac3]'} transition duration-300`} />
+    );
+};
+
+export default CheckoutSteps;
